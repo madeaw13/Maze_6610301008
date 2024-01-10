@@ -155,12 +155,7 @@ class MazeSolver:
                 if self.maze[i][j] == 'E':
                     return i, j
 
-
-
-    def heuristic(self, current, goal):
-        return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
-
-    def Start(self):
+    def begin(self):
         start_node = (self.start, 0)
         heap = [start_node]
         visited = set()
@@ -182,14 +177,10 @@ class MazeSolver:
             for dr, dc in directions:
                 new_row, new_col = row + dr, col + dc
 
-                if maze.isInBound(self,new_col,new_row):
-                    new_cost = cost + 1 + self.heuristic((new_row, new_col), self.end)
-                    heapq.heappush(heap, ((new_row, new_col), new_cost))
-
         return True
 
     def autoControl(self):
-        if self.Start():
+        if self.begin():
             stack = Stack()
             visited = set()
         while True:

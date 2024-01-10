@@ -83,7 +83,7 @@ class maze:
         keyboard.wait("")
 
 
-    def move_up(self):
+    def moveUp(self):
         next_move = pos(self.ply.y-1, self.ply.x)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
@@ -96,7 +96,7 @@ class maze:
                 return False
         return True
     
-    def move_down(self):
+    def moveDown(self):
         next_move = pos(self.ply.y + 1, self.ply.x)
         if self.isInBound(next_move.y, next_move.x):
             if self.maze[next_move.y][next_move.x] == (" "):
@@ -109,7 +109,7 @@ class maze:
                 return False
         return True
 
-    def move_left(self):
+    def moveLeft(self):
         next_move = pos(self.ply.y, self.ply.x-1)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
@@ -122,7 +122,7 @@ class maze:
                 return False
         return True
 
-    def move_right(self):
+    def moveRight(self):
         next_move = pos(self.ply.y, self.ply.x+1)
         if self.isInBound(next_move.y,next_move.x):
             if self.maze[next_move.y][next_move.x] == " ":
@@ -160,7 +160,7 @@ class MazeSolver:
     def heuristic(self, current, goal):
         return abs(current[0] - goal[0]) + abs(current[1] - goal[1])
 
-    def astar(self):
+    def Start(self):
         start_node = (self.start, 0)
         heap = [start_node]
         visited = set()
@@ -188,38 +188,38 @@ class MazeSolver:
 
         return True
 
-    def auto_solve_new(self):
-        if self.astar():
+    def autoControl(self):
+        if self.Start():
             stack = Stack()
             visited = set()
         while True:
-            ceakpoint = self.find_start()
-            m.ply = pos(ceakpoint[0],ceakpoint[1])
-            if ceakpoint not in visited:
-                visited.add(ceakpoint)
+            cheakpoint = self.find_start()
+            m.ply = pos(cheakpoint[0],cheakpoint[1])
+            if cheakpoint not in visited:
+                visited.add(cheakpoint)
             
             if m.maze[m.ply.y - 1][m.ply.x] != "X" and (m.ply.y - 1, m.ply.x) not in visited:
-                m.move_up()
+                m.moveUp()
                 m.print()
-                stack.push(ceakpoint)
+                stack.push(cheakpoint)
                 print("MoveUp")    
 
             elif m.maze[m.ply.y + 1][m.ply.x] != "X" and (m.ply.y + 1, m.ply.x) not in visited:
-                m.move_down()
+                m.moveDown()
                 m.print()
-                stack.push(ceakpoint)
+                stack.push(cheakpoint)
                 print("MoveDown")
 
             elif m.maze[m.ply.y][m.ply.x + 1] != "X" and (m.ply.y, m.ply.x + 1) not in visited:
-                m.move_right()
+                m.moveRight()
                 m.print()
-                stack.push(ceakpoint)
+                stack.push(cheakpoint)
                 print("MoveRight")
 
             elif m.maze[m.ply.y][m.ply.x - 1] != "X" and (m.ply.y, m.ply.x - 1) not in visited:
-                m.move_left()
+                m.moveLeft()
                 m.print()
-                stack.push(ceakpoint)
+                stack.push(cheakpoint)
                 print("MoveLeft")
 
             else:
@@ -240,6 +240,6 @@ if __name__ == '__main__':
     m = maze()
     m.print()
     solver = MazeSolver(m.maze)
-    solver.auto_solve_new()
+    solver.autoControl()
     m.print
 

@@ -227,7 +227,7 @@ class MazeSolver:
                 while not stack.isEmpty() and Noway == True : # and m.maze[m.ply.y][m.ply.x] == "P" :
                     lastmove = stack.pop()
                     visited.remove(lastmove)
-                    m.maze[ceakpoint[0]][ceakpoint[1]] = "0"
+                    m.maze[cheakpoint[0]][cheakpoint[1]] = "0"
                     m.ply = pos(lastmove[0],lastmove[1])
                     m.maze[m.ply.y][m.ply.x] = "P"
                     m.print()
